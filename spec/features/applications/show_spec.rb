@@ -38,4 +38,16 @@ RSpec.describe "application show page" do
       expect(page).to have_content("In Progress")
     end
   end
+
+  describe "Searching for Pets for an Application" do
+    it "has a section to add a pet" do
+      expect(page).to have_content("Add a Pet to this Application")
+      
+      fill_in "Name", with: "Lobster"
+      click_button("Submit")
+
+      expect(page).to have_current_path("/applications/#{@application.id}")
+      expect(page).to have_content("Lobster")
+    end
+  end
 end

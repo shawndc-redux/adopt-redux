@@ -12,4 +12,8 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def self.search_for_pet(search)
+    where('lower(name) like ?', "%#{search.downcase}%")
+  end
 end

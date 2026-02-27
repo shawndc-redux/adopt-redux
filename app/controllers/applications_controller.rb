@@ -2,7 +2,11 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:search].present?
-      @searched_pets = Pet.find_by(name: params[:search])
+      @searched_pets = Pet.search_for_pet(params[:search])
+    end
+
+    if params[:search].present? && @searched_pets.empty?
+      flash[:alert] = "No pets match this search"
     end
   end
 

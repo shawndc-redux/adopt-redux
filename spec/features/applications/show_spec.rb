@@ -78,4 +78,27 @@ RSpec.describe "application show page" do
       end
     end
   end
+
+  describe "add a pet to an application" do
+    context "when I visit an application show page" do
+      context "search for a pet by name" do
+        before(:each) do
+          visit "/applications/#{@application_2.id}"
+          fill_in :search, with: "Lobs"
+          click_button("Search")
+        end
+
+        it "has a button to adopt pet" do
+          expect(page).to have_button("Adopt this Pet")
+        end
+
+        it "can add a pet to an application" do
+          click_button("Adopt this Pet")
+
+          expect(page).to have_current_path("/applications/#{@application_2.id}")
+          expect(page).to have_content("Lobster")
+        end
+      end
+    end
+  end
 end

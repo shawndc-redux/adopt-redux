@@ -10,6 +10,15 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def add_pet
+    app_pet = ApplicationPet.new
+    app_pet.pet_id = params[:pet_id]
+    app_pet.application_id = params[:id]
+    if app_pet.save
+      redirect_to "/applications/#{params[:id]}"
+    end
+  end
+
   def new
   end
 

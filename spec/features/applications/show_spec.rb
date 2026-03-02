@@ -94,7 +94,6 @@ RSpec.describe "application show page" do
 
         it "can add a pet to an application" do
           click_button("Adopt this Pet")
-
           expect(page).to have_current_path("/applications/#{@application_2.id}")
           expect(page).to have_content("Lobster")
         end

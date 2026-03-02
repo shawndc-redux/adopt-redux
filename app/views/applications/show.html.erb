@@ -1,29 +1,49 @@
-<h1><%= @application.name %></h1>
+<style>
+  .body {
+    border: 1px outset black;
+    background-color: SeaShell;
+    font-family: Helvetica;
+    text-align: left;
+    }
+</style>
 
-<h2>Address</h2>
+<div class="body">
+  <h1><%= @application.name %></h1>
 
-<h3><%= @application.address %></h3>
-<h3><%= @application.city %></h3>
-<h3><%= @application.state %></h3>
-<h3><%= @application.zip %></h3>
-<h3><%= @application.description %></h3>
-<h3><%= @application.status %></h3>
+  <div>
+  <h2>Address</h2>
+  <p><%= @application.address %></p>
+  <p><%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
+  </div>
 
-<div>
-  <h2>Add a Pet to this Application</h2>
-  <%= form_with url:"/applications/#{@application.id}", method: :get, local: :true do |f| %>
-  <%= f.label "Search for a pet's name:" %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
-  <% end %>
+  <div>
+  <h2>Details</h2>
+  <p> Why I want to adopt: <%= @application.description %></p>
+  <p>Status: <%= @application.status %></p>
 
-  <% if @searched_pets.present? %>
-    <% @searched_pets.each do |pet| %>
-      <%= pet.name %>
+  <div>
+    <h2>Add a Pet to this Application</h2>
+    <%= form_with url:"/applications/#{@application.id}", method: :get, local: :true do |f| %>
+    <%= f.label "Search for a pet's name:" %>
+    <%= f.text_field :search %>
+    <%= f.submit "Search" %>
     <% end %>
-  <% end %>
+  </div>
 
-  <% @application.pets.each do |pet| %>
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-  <% end %>
+  <div>
+    <% if @searched_pets.present? %>
+      <h2>Search Results</h2>
+      <% @searched_pets.each do |pet| %>
+        <%= pet.name %>
+        <%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets/#{pet.id}", method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>My Pet Applications</h2>
+    <% @application.pets.each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <% end %>
+  </div>
 </div>

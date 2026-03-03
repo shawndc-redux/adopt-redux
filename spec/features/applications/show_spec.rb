@@ -100,4 +100,34 @@ RSpec.describe "application show page" do
       end
     end
   end
+
+  describe "submit an application" do
+    context "when I visit an application show page" do
+      before(:each) do
+        visit "/applications/#{@application_2.id}"
+        fill_in :search, with: "Lobs"
+        click_button("Search")
+        click_button("Adopt this Pet")
+      end
+      
+      context "section to submit my application" do
+        it "has a section to input why i would make a good owner" do        
+          within("#pet-applications") do
+            expect(page).to have_content("Why I would make a good owner for these pet(s)")
+            expect(find("form")).to have_content("Reason")
+            expect(find("form")).to have_button("Submit this application")
+            
+            fill_in :reason, with: "I think she is cute"
+            click_button("Submit this application")
+          end
+  
+          expect(page).to have_current_path("/applications/#{@application_2.id}")
+          expect(page).to have_content("Pending")
+          expect(page).to have_content("Lobster")
+          expect(page).to_not have_content("Add a Pet to this Application")
+        end
+      end
+    end
+
+  end
 end

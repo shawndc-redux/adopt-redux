@@ -3,7 +3,7 @@
 ## Deploy
 
 ```
-[ ] done
+[x] done
 
 0: Deploy your application to the internet
 
@@ -27,7 +27,7 @@ Continuous Integration / Deployment is not allowed for this project.
 Visitors to the site will be able to create applications to adopt pets. An application has many pets. Pets can have many applications.
 
 ```
-[ ] done
+[x] done
 
 1. Application Show Page
 
@@ -42,7 +42,7 @@ Then I can see the following:
 ```
 
 ```
-[ ] done
+[x] done
 
 2. Starting an Application
 
@@ -65,7 +65,7 @@ And I see an indicator that this application is "In Progress"
 ```
 
 ```
-[ ] done
+[x] done
 
 3. Starting an Application, Form not Completed
 
@@ -78,7 +78,7 @@ And I see a message that I must fill in those fields.
 ```
 
 ```
-[ ] done
+[x] done
 
 4. Searching for Pets for an Application
 
@@ -94,7 +94,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 5. Add a Pet to an Application
 
@@ -109,7 +109,7 @@ And I see the Pet I want to adopt listed on this application
 ```
 
 ```
-[ ] done
+[x] done
 
 6. Submit an Application
 

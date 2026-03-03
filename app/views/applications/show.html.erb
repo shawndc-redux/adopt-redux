@@ -21,16 +21,18 @@
   <p> Why I want to adopt: <%= @application.description %></p>
   <p>Status: <%= @application.status %></p>
 
-  <div>
+  <div id="add-pets">
+  <% if @application.status == "In Progress" %>
     <h2>Add a Pet to this Application</h2>
     <%= form_with url:"/applications/#{@application.id}", method: :get, local: :true do |f| %>
     <%= f.label "Search for a pet's name:" %>
     <%= f.text_field :search %>
     <%= f.submit "Search" %>
     <% end %>
+  <% end %>
   </div>
 
-  <div>
+  <div id="search-results">
     <% if @searched_pets.present? %>
       <h2>Search Results</h2>
       <% @searched_pets.each do |pet| %>
@@ -40,10 +42,17 @@
     <% end %>
   </div>
 
-  <div>
+  <div id="pet-applications">
     <h2>My Pet Applications</h2>
     <% @application.pets.each do |pet| %>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
     <% end %>
+
+    <h3>Why I would make a good owner for these pet(s)</h3>
+      <%= form_with url:"/applications/#{@application.id}", method: :patch, local: :true do |f| %>
+        <%= f.label "Reason:" %>
+        <%= f.text_field :reason %>
+        <%= f.submit "Submit this application" %>
+      <% end %>
   </div>
 </div>

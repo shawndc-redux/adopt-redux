@@ -48,11 +48,13 @@
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
     <% end %>
 
-    <h3>Why I would make a good owner for these pet(s)</h3>
+    <% if @application.pets != [] %>
+      <h3>Why I would make a good owner for these pet(s)</h3>
       <%= form_with url:"/applications/#{@application.id}", method: :patch, local: :true do |f| %>
         <%= f.label "Reason:" %>
         <%= f.text_field :reason %>
         <%= f.submit "Submit this application" %>
       <% end %>
+    <% end %>
   </div>
 </div>

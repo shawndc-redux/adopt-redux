@@ -111,13 +111,15 @@ RSpec.describe "application show page" do
       end
       
       context "section to submit my application" do
-        it "has a section to input why i would make a good owner" do
-          expect(page).to have_content("Why I would make a good owner for these pet(s)")
-          expect(find("form")).to have_content("Reason")
-          expect(page).to have_button("Submit this application")
-  
-          fill_in :reason, with: "I think she is cute"
-          click_button("Submit this application")
+        it "has a section to input why i would make a good owner" do        
+          within("#pet-applications") do
+            expect(page).to have_content("Why I would make a good owner for these pet(s)")
+            expect(find("form")).to have_content("Reason")
+            expect(find("form")).to have_button("Submit this application")
+            
+            fill_in :reason, with: "I think she is cute"
+            click_button("Submit this application")
+          end
   
           expect(page).to have_current_path("/applications/#{@application_2.id}")
           expect(page).to have_content("Pending")

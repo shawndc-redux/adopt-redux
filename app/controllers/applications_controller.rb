@@ -11,12 +11,10 @@ class ApplicationsController < ApplicationController
   end
 
   def add_pet
-    app_pet = ApplicationPet.new
-    app_pet.pet_id = params[:pet_id]
-    app_pet.application_id = params[:id]
-    if app_pet.save
-      redirect_to "/applications/#{params[:id]}"
-    end
+    @application = Application.find(params[:id])
+    @pet = Pet.find(params[:pet_id])
+    @application.add_pet(@pet)
+    redirect_to "/applications/#{params[:id]}"
   end
 
   def new

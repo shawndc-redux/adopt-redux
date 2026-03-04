@@ -3,4 +3,8 @@ class Application < ApplicationRecord
   enum status: {"In Progress": 0, "Pending": 1, "Accepted": 2, "Rejected": 3}
   has_many :application_pets
   has_many :pets, through: :application_pets
+
+  def add_pet(pet)
+    self.pets << pet
+  end
 end

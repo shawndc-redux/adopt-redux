@@ -25,9 +25,9 @@
       <section id="pets-<%=pet.id%>">
         <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
         <%= form_with url: "/applications/#{@application.id}/pets/#{pet.id}", method: :patch, local: true do |f| %>
-          <% if pet.accepted %>
+          <% if pet.accepted(@application.id) %>
             <p>Approved<p>
-          <% elsif pet.rejected %>
+          <% elsif pet.rejected(@application.id) %>
             <p>Rejected<p>
           <% else %>
             <%= f.submit name: "status", value: "Approve" %>

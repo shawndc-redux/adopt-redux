@@ -16,4 +16,12 @@ class Pet < ApplicationRecord
   def self.search_for_pet(search)
     where('lower(name) like ?', "%#{search.downcase}%")
   end
+
+  def accepted(app_id)
+    !(ApplicationPet.where(pet_id: self.id).where(application_id: app_id).where(application_pet_status: "Accepted")).empty?
+  end
+
+  def rejected(app_id)
+    !(ApplicationPet.where(pet_id: self.id).where(application_id: app_id).where(application_pet_status: "Rejected")).empty?
+  end
 end

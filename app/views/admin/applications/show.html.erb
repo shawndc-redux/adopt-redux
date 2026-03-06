@@ -1,0 +1,39 @@
+<style>
+  .body {
+    border: 1px outset black;
+    background-color: SeaShell;
+    font-family: Helvetica;
+    text-align: left;
+    }
+</style>
+
+<div class="body">
+  <h1><%= @application.name %></h1>
+
+  <div class ="details">
+    <h2>Address</h2>
+    <p><%= @application.address %></p>
+    <p><%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
+
+    <h2>Details</h2>
+    <p> Why I want to adopt: <%= @application.description %></p>
+    <p>Status: <%= @application.status %></p>
+  </div>
+
+
+    <% @application.pets.each do |pet| %>
+      <section id="pets-<%=pet.id%>">
+        <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+        <%= form_with url: "/applications/#{@application.id}/pets/#{pet.id}", method: :patch, local: true do |f| %>
+          <% if pet.accepted(@application.id) %>
+            <p>Approved<p>
+          <% elsif pet.rejected(@application.id) %>
+            <p>Rejected<p>
+          <% else %>
+            <%= f.submit name: "status", value: "Approve" %>
+            <%= f.submit name: "status", value: "Reject" %>
+          <% end %>
+        <% end %>
+      </section>    
+    <% end %>
+</div>
